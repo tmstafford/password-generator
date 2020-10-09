@@ -13,19 +13,18 @@ var confirmNumericChar = "";
 var confirmSpecialChar = "";
 
 
-
-
 // User Prompts
-
 
 var generatePassword = function() {
 
   var length = window.prompt("How long do you want your password? Choose between 8 and 128 characters.");
 
-  if (length < 8 || length > 128) {
+  if (length < 8 || length > 128 || length === null || length === "") {
     window.alert("Your password must be between 8 and 128 characters. Please try again.");
     var length = window.prompt("How long do you want your password? Choose between 8 and 128 characters.");
   }
+
+  window.alert("Please confirm which of the following character types you would like to include in your password.");
 
   var confirmLowerCase = window.confirm("Click OK to confirm if you would like to include lowercase characters?");
   var confirmUpperCase = window.confirm("Click OK to confirm if you would like to include uppercase characters?");
@@ -42,6 +41,7 @@ var generatePassword = function() {
 
   var passwordChar = "";
 
+  // if and else statement conditions 
   if (confirmLowerCase && confirmUpperCase && confirmNumericChar && confirmSpecialChar) {
     passwordChar = lowerCase + upperCase + numericChar + specialChar;
   }
@@ -92,7 +92,7 @@ var generatePassword = function() {
 
   var randomPassword = "";
 
-  // for loop for actually generating password? 
+  // for loop for actually generating password 
   for (var i = 0; i < length; i++) {
     randomPassword += passwordChar.charAt(Math.floor(Math.random() * passwordChar.length));
     console.log(randomPassword);
