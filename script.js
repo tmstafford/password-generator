@@ -6,93 +6,100 @@ var upperCase = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 var numericChar = ("123456789");
 var specialChar = ("!#$%&'()*+,-./:;<=>?@[]^_|~");
 
-var passwordChar = "";
-var randomPassword = "";
+var length = "";
+var confirmLowerCase = "";
+var confirmUpperCase = "";
+var confirmNumericChar = "";
+var confirmSpecialChar = "";
+
 
 
 
 // User Prompts
 
-// make length a function and add to generatePassword ()
-var length = window.prompt("How long do you want your password? Choose between 8 and 128 characters.");
-
-if (length < 8 || length > 128) {
-  window.alert("Your password must be between 8 and 128 characters. Please try again.");
-  return;
-}
-
-// make these confirms a function and add to generatePassword ()
-var confirmLowerCase = window.confirm("Do you want to include lowercase characters?");
-var confirmUpperCase = window.confirm("Do you want to include uppercase characters?");
-var confirmNumericChar = window.confirm("Do you want to include numeric characters?");
-var confirmSpecialChar = window.confirm("Do you want to include special characters?");
-
-// if at least one character type isn't confirmed, can not proceed
-if (!confirmLowerCase && !confirmUpperCase && !confirmNumericChar && !confirmSpecialChar) {
-  window.alert("Your password must contain at least one character type. Please try again.");
-  return;
-}
 
 var generatePassword = function() {
 
-  // add length function (after making it one??)
+  var length = window.prompt("How long do you want your password? Choose between 8 and 128 characters.");
 
-  // add confirm character function (after making it one??)
-  // so that rest of this function can continue to make correct random password
+  if (length < 8 || length > 128) {
+    window.alert("Your password must be between 8 and 128 characters. Please try again.");
+    var length = window.prompt("How long do you want your password? Choose between 8 and 128 characters.");
+  }
+
+  var confirmLowerCase = window.confirm("Click OK to confirm if you would like to include lowercase characters?");
+  var confirmUpperCase = window.confirm("Click OK to confirm if you would like to include uppercase characters?");
+  var confirmNumericChar = window.confirm("Click OK to confirm if you would like to include numeric characters?");
+  var confirmSpecialChar = window.confirm("Click OK to confirm if you would like to include special characters?");
+
+  if (!confirmLowerCase && !confirmUpperCase && !confirmNumericChar && !confirmSpecialChar) {
+    window.alert("Your password must contain at least one character type. Please try again.");
+    var confirmLowerCase = window.confirm("Click OK to confirm if you would like to include lowercase characters?");
+    var confirmUpperCase = window.confirm("Click OK to confirm if you would like to include uppercase characters?");
+    var confirmNumericChar = window.confirm("Click OK to confirm if you would like to include numeric characters?");
+    var confirmSpecialChar = window.confirm("Click OK to confirm if you would like to include special characters?");
+  }
+
+  var passwordChar = "";
 
   if (confirmLowerCase && confirmUpperCase && confirmNumericChar && confirmSpecialChar) {
-    passwordChar = confirmLowerCase + confirmUpperCase + confirmNumericChar + confirmSpecialChar;
+    passwordChar = lowerCase + upperCase + numericChar + specialChar;
   }
   else if (confirmLowerCase && confirmUpperCase && confirmNumericChar) {
-    passwordChar = confirmLowerCase + confirmUpperCase + confirmNumericChar;
+    passwordChar = lowerCase + upperCase + numericChar;
   }
   else if (confirmLowerCase && confirmUpperCase && confirmSpecialChar) {
-    passwordChar = confirmLowerCase + confirmUpperCase + confirmSpecialChar;
+    passwordChar = lowerCase + upperCase + specialChar;
   }
   else if (confirmLowerCase && confirmNumericChar && confirmSpecialChar) {
-    passwordChar = confirmLowerCase + confirmNumericChar + confirmSpecialChar;
+    passwordChar = lowerCase + numericChar + specialChar;
   }
   else if (confirmUpperCase && confirmNumericChar && confirmSpecialChar) {
-    passwordChar = confirmUpperCase + confirmNumericChar + confirmSpecialChar;
+    passwordChar = upperCase + numericChar + specialChar;
   }
   else if (confirmNumericChar && confirmSpecialChar) {
-    passwordChar = confirmNumericChar + confirmSpecialChar;
+    passwordChar = numericChar + specialChar;
   }
   else if (confirmUpperCase && confirmSpecialChar) {
-    passwordChar = confirmUpperCase + confirmSpecialChar;
+    passwordChar = upperCase + specialChar;
   }
   else if (confirmUpperCase && confirmNumericChar) {
-    passwordChar = confirmUpperCase + confirmNumericChar;
+    passwordChar = upperCase + numericChar;
   }
   else if (confirmLowerCase && confirmSpecialChar) {
-    passwordChar = confirmLowerCase + confirmSpecialChar;
+    passwordChar = lowerCase + specialChar;
   }
   else if (confirmLowerCase && confirmNumericChar) {
-    passwordChar = confirmLowerCase + confirmNumericChar;
+    passwordChar = lowerCase + numericChar;
   }
   else if (confirmLowerCase && confirmUpperCase) {
-    passwordChar = confirmLowerCase + confirmUpperCase;
+    passwordChar = lowerCase + upperCase;
   }
   else if (confirmLowerCase) {
-    passwordChar = confirmLowerCase;
+    passwordChar = lowerCase;
   }
   else if (confirmUpperCase) {
-    passwordChar = confirmUpperCase;
+    passwordChar = upperCase;
   }
   else if (confirmNumericChar) {
-    passwordChar = confirmNumericChar;
+    passwordChar = numericChar;
   }
   else if (confirmSpecialChar) {
-    passwordChar = confirmSpecialChar;
+    passwordChar = specialChar;
   }
+
+  console.log(passwordChar);
+
+  var randomPassword = "";
 
   // for loop for actually generating password? 
   for (var i = 0; i < length; i++) {
-    randomPassword = passwordChar.charAt(Math.floor(Math.random() * passwordChar.length));
+    randomPassword += passwordChar.charAt(Math.floor(Math.random() * passwordChar.length));
+    console.log(randomPassword);
   }
   return randomPassword;
 
-}
+};
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -108,3 +115,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
