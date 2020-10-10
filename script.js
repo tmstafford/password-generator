@@ -21,22 +21,19 @@ var generatePassword = function() {
 
   if (length < 8 || length > 128 || length === null || length === "") {
     window.alert("Your password must be between 8 and 128 characters. Please try again.");
-    var length = window.prompt("How long do you want your password? Choose between 8 and 128 characters.");
+    return generatePassword();
   }
-
+    
   window.alert("Please confirm which of the following character types you would like to include in your password.");
 
-  var confirmLowerCase = window.confirm("Click OK to confirm if you would like to include lowercase characters?");
-  var confirmUpperCase = window.confirm("Click OK to confirm if you would like to include uppercase characters?");
-  var confirmNumericChar = window.confirm("Click OK to confirm if you would like to include numeric characters?");
-  var confirmSpecialChar = window.confirm("Click OK to confirm if you would like to include special characters?");
-
-  if (!confirmLowerCase && !confirmUpperCase && !confirmNumericChar && !confirmSpecialChar) {
-    window.alert("Your password must contain at least one character type. Please try again.");
     var confirmLowerCase = window.confirm("Click OK to confirm if you would like to include lowercase characters?");
     var confirmUpperCase = window.confirm("Click OK to confirm if you would like to include uppercase characters?");
     var confirmNumericChar = window.confirm("Click OK to confirm if you would like to include numeric characters?");
     var confirmSpecialChar = window.confirm("Click OK to confirm if you would like to include special characters?");
+  
+  if (!confirmLowerCase && !confirmUpperCase && !confirmNumericChar && !confirmSpecialChar) {
+    window.alert("Your password must contain at least one character type. Please try again.");
+    return generatePassword();
   }
 
   var passwordChar = "";
